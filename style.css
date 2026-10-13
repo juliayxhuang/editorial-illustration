@@ -32,7 +32,7 @@ body {
   width: calc(100% - clamp(24px, 3.5vw, 64px));
   max-width: 1450px;
   margin-left: clamp(24px, 3.5vw, 64px);
-  padding: 0 clamp(188px, 27vw, 480px) 4rem 0;
+  padding: 0 clamp(208px, 31vw, 540px) 4rem 0;
 }
 
 /* ─── HERO ─── */
@@ -80,7 +80,7 @@ body {
 }
 
 .byline-name {
-  font-weight: 700;
+  font-weight: 400;
   text-decoration: underline;
   color: var(--text-dark);
 }
@@ -101,7 +101,7 @@ body {
 .inline-link {
   color: var(--text-dark);
   text-decoration: underline;
-  font-weight: 600;
+  font-weight: 400;
 }
 .inline-link:hover { color: var(--uf-orange); }
 
@@ -112,7 +112,7 @@ body {
 
 .article-image-block {
   float: right;
-  width: 62%;
+  width: 66%;
   max-width: 740px;
   margin: 0 0 1rem 1.4rem;
 }
@@ -141,6 +141,7 @@ body {
 }
 
 .minigame-section { clear: both; }
+.post-image-text { clear: both; }
 
 /* ─── DRAGGABLE GATOR WORDS — orange text only, no pill ─── */
 .draggable-gator {
@@ -396,7 +397,7 @@ body {
   flex-direction: column;
   gap: 10px;
   width: min(280px, calc(100vw - 32px));
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 /* Speech bubble — styled after the "facts matter" reference */
@@ -469,7 +470,7 @@ body {
 #gameover-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(255,102,0,0.94);
+  background: var(--uf-orange);
   z-index: 9999;
   display: flex;
   align-items: center;

@@ -119,23 +119,21 @@ function launchWalker() {
   const highestBottom = Math.max(24, window.innerHeight - walker.offsetHeight - 24);
   walker.style.bottom = (24 + Math.random() * (highestBottom - 24)) + "px";
 
-  // Walk continuously from one edge to the other.
-  requestAnimationFrame(() => {
-    const walkerW = walker.offsetWidth;
-    const startX = fromRight ? vpW : -walkerW;
-    const endX = fromRight ? -walkerW : vpW;
-    const duration = getWalkDuration(Math.abs(endX - startX));
-    walker.style.left = startX + "px";
-    walker.style.transition = "none";
-    requestAnimationFrame(() => {
-      walker.style.transition = `left ${duration}ms linear`;
-      walker.style.left = endX + "px";
-    });
-    setTimeout(() => {
-      walker.remove();
-      walkerActive = false;
-      setTimeout(launchWalker, 1500);
-    }, duration + 100);
+  const walkerW = walker.offsetWidth;
+  const startX = fromRight ? vpW : -walkerW;
+  const endX = fromRight ? -walkerW : vpW;
+  const duration = getWalkDuration(Math.abs(endX - startX));
+  walker.style.left = startX + "px";
+  const walk = walker.animate(
+    [{ left: `${startX}px` }, { left: `${endX}px` }],
+    { duration, easing: "linear", fill: "forwards" }
+  );
+  walker.addEventListener("pointerenter", () => walk.pause());
+  walker.addEventListener("pointerleave", () => walk.play());
+  walk.finished.then(() => {
+    walker.remove();
+    walkerActive = false;
+    setTimeout(launchWalker, 1500);
   });
 }
 
